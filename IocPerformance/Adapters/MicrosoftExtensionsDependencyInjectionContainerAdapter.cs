@@ -37,13 +37,14 @@ namespace IocPerformance.Adapters
 
         public override void Prepare()
         {
-            this.serviceCollection = this.CreateServiceCollection();
+            this.serviceCollection = new ServiceCollection();
+            this.RegisterAspNetCoreClasses(serviceCollection);
 
             this.RegisterBasic();
             this.RegisterOpenGeneric();
             this.RegisterMultiple();
 
-            this.serviceProvider = this.serviceCollection.BuildServiceProvider();
+            this.serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         public override void PrepareBasic()
